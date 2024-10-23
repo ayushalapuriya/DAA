@@ -45,8 +45,54 @@ public class Graph {
         }
         return size / 2;
     }
+  
+    //checking the path between vertices
 
-    //find path between two vertex using recursion and backtracking !!!
+    public boolean hasPath(int v1, int v2) {
+    HashSet<Integer> visited = new HashSet<Integer>();
+    return hasPath(v1, v2, visited);
+    }
+
+    public boolean hasPath(int v1, int v2, HashSet<Integer> visited) {
+    if (v1 == v2) {
+        return true;
+    }
+    visited.add(v1);
+    for (int k : graph.get(v1).keySet()) {
+        if (!visited.contains(k)) {
+            if (hasPath(k, v2, visited)) {
+                return true;
+            }
+        }
+    }
+    visited.remove(v1);
+    return false;
+    }
+    //print all possible path from v1 to v2
+
+    public void hasAllPath(int v1, int v2) {
+        HashSet<Integer> visited = new HashSet<Integer>();
+        hasAllPath(v1, v2, visited,v1+"");
+        }
+    
+        public void hasAllPath(int v1, int v2, HashSet<Integer> visited,String ans) {
+        if (v1 == v2) {
+            System.out.println(ans);
+            return;
+        }
+        visited.add(v1);
+        for (int k : graph.get(v1).keySet()) {
+            if (!visited.contains(k)) {
+                 hasAllPath(k, v2, visited,ans+k);
+                    
+                }
+            }
+        
+        visited.remove(v1);
+        return ;
+        }
+
+    
     
 
 
@@ -89,6 +135,19 @@ public class Graph {
 
         // Finding total edges
         System.out.println("\nTotal edges in the graph: " + graph.findEdge());
+
+         // Checking for paths between vertices
+    System.out.println("\nChecking for paths:");
+    System.out.println("Path between 1 and 3: " + graph.hasPath(1, 3));
+    System.out.println("Path between 3 and 6: " + graph.hasPath(3, 6));
+    System.out.println("Path between 1 and 7: " + graph.hasPath(1, 7));
+
+          // Print all possible paths from v1 to v2
+    System.out.println("All possible paths from 1 to 7:");
+    graph.hasAllPath(1, 3);
+     
     }
+       
+
 }
 
