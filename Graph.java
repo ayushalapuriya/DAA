@@ -92,6 +92,97 @@ public class Graph {
         return ;
         }
 
+        //bfs
+
+        public void BFS(int v) {
+            HashSet<Integer> visited = new HashSet<Integer>();
+            Queue<Integer> q = new LinkedList<Integer>();
+            q.add(v);
+            
+            while (!q.isEmpty()) {
+                int rv = q.poll();
+                    if (visited.contains(rv)) {
+                      continue;
+                    }
+                    visited.add(rv);
+                    System.out.println(rv);
+                    for (int k : graph.get(rv).keySet()) {
+                        if(!visited.contains(k)){
+                            q.add(k);
+                        }
+                }
+            }
+        }
+
+        //dfs
+
+        public void DFS(int v) {
+            HashSet<Integer> visited = new HashSet<Integer>();
+            Stack<Integer> stack = new Stack<Integer>();
+            stack.push(v);
+            
+            while (!stack.isEmpty()) {
+                int rv = stack.pop();
+                if (visited.contains(rv)) {
+                    continue;
+                }
+                visited.add(rv);
+                System.out.println(rv);
+                for (int k : graph.get(rv).keySet()) {
+                    if (!visited.contains(k)) {
+                        stack.push(k);
+                    }
+                }
+            }
+        }
+
+              // BFT (Breadth-First Traversal)
+              public void BFT(int v) {
+                HashSet<Integer> visited = new HashSet<Integer>();
+                Queue<Integer> q = new LinkedList<Integer>();
+                q.add(v);
+                visited.add(v);
+            
+                while (!q.isEmpty()) {
+                    int rv = q.poll();
+                    System.out.println(rv); 
+            
+                    for (int k : graph.get(rv).keySet()) {
+                        if (!visited.contains(k)) {
+                            visited.add(k); 
+                            q.add(k); 
+                        }
+                    }
+                }
+            }
+
+     //dft (similar approach)
+     public void DFT(int v) {
+        HashSet<Integer> visited = new HashSet<Integer>();
+        Stack<Integer> stack = new Stack<Integer>();
+        stack.push(v);
+    
+        while (!stack.isEmpty()) {
+            int rv = stack.pop();
+            if (visited.contains(rv)) {
+                continue;
+            }
+            visited.add(rv);
+            System.out.println(rv);
+    
+        
+            for (int k : graph.get(rv).keySet()) {
+                if (!visited.contains(k)) {
+                    stack.push(k);
+                }
+            }
+        }
+    } 
+
+    //to count the components of through bfs/dfs
+    
+
+
     
     
 
@@ -104,8 +195,8 @@ public class Graph {
         graph.addEdge(1, 4, 20);
         graph.addEdge(2, 3, 30);
         graph.addEdge(3, 4, 10);
-        graph.addEdge(4, 5, 40);
-        graph.addEdge(5, 6, 12);
+        // graph.addEdge(4, 5, 40);
+        // graph.addEdge(5, 6, 12);
         graph.addEdge(5, 7, 50);
         graph.addEdge(6, 7, 5);
 
@@ -145,8 +236,13 @@ public class Graph {
           // Print all possible paths from v1 to v2
     System.out.println("All possible paths from 1 to 7:");
     graph.hasAllPath(1, 3);
+          //bfs(1)
+    graph.BFS(1);
+    graph.BFS(1);
+    graph.BFT(1);
      
     }
+    
        
 
 }
