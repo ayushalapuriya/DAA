@@ -179,7 +179,34 @@ public class Graph {
         }
     } 
 
-    //to count the components of through bfs/dfs
+    //to count the components of through bfs/dfs   ??
+
+    //to find the circle  in the graph   ???? doubt
+
+    public boolean IsCycle(int v) {
+        HashSet<Integer> visited = new HashSet<Integer>();
+        Queue<Integer> q = new LinkedList<Integer>();
+        q.add(v);
+        while (!q.isEmpty()) {
+            int rv = q.poll();
+                if (visited.contains(rv)) {
+                  return true;
+                }
+                visited.add(rv);
+                System.out.println(rv);
+                for (int k : graph.get(rv).keySet()) {
+                    if(!visited.contains(k)){
+                        q.add(k);
+                    }
+            }
+        }
+        return false;
+
+
+    }
+    
+        
+
     
 
 
@@ -240,6 +267,7 @@ public class Graph {
     graph.BFS(1);
     graph.BFS(1);
     graph.BFT(1);
+    // graph.IsCycle(1);
      
     }
     
