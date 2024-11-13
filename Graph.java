@@ -204,6 +204,53 @@ public class Graph {
 
 
     }
+    // prims algo    ??
+    public void primsAlgorithm(int startVertex) {
+        HashSet<Integer> visited = new HashSet<Integer>();
+        PriorityQueue<Edge> minHeap = new PriorityQueue<>(Comparator.comparingInt(e -> e.weight));
+        visited.add(startVertex);
+        
+        // Add all edges from the starting vertex to the priority queue
+        for (Map.Entry<Integer, Integer> entry : graph.get(startVertex).entrySet()) {
+            minHeap.add(new Edge(startVertex, entry.getKey(), entry.getValue()));
+        }
+        
+        while (!minHeap.isEmpty()) {
+            Edge edge = minHeap.poll(); // Get the edge with the minimum weight
+            
+            // If the destination vertex is already visited, skip this edge
+            if (visited.contains(edge.destination)) {
+                continue;
+            }
+            
+            // Include this edge in the MST
+            System.out.println("Edge: " + edge.source + " - " + edge.destination + " with weight: " + edge.weight);
+            visited.add(edge.destination);
+            
+            // Add all edges from the newly added vertex to the priority queue
+            for (Map.Entry<Integer, Integer> entry : graph.get(edge.destination).entrySet()) {
+                if (!visited.contains(entry.getKey())) {
+                    minHeap.add(new Edge(edge.destination, entry.getKey(), entry.getValue()));
+                }
+            }
+        }
+    }
+    // Helper class to represent an edge
+    class Edge {
+        int source;
+        int destination;
+        int weight;
+    
+        Edge(int source, int destination, int weight) {
+            this.source = source;
+            this.destination = destination;
+            this.weight = weight;
+        }
+    }
+
+     // dijkstra's  algo ??
+
+   
     
         
 
@@ -268,6 +315,7 @@ public class Graph {
     graph.BFS(1);
     graph.BFT(1);
     // graph.IsCycle(1);
+    graph.primsAlgorithm(1); // Start Prim's algorithm from vertex 1
      
     }
     
