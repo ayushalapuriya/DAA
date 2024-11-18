@@ -1,1 +1,0 @@
-graph.IsCycle(1);
