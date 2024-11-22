@@ -11,7 +11,7 @@ public class Graph {
     public void addEdge(int v1, int v2, int w){
         if(!graph.containsKey(v1)){
             graph.put(v1,new HashMap<Integer,Integer>());
-        }
+  }
         if(!graph.containsKey(v2)){
             graph.put(v2,new HashMap<Integer,Integer>());
         }
